@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import LoginContainer from './components/LoginContainer.vue'
+    import Header from "./components/Header.vue"
 </script>
 
 <template>
-    <LoginContainer />
+    <Header/>
+    <RouterView />
 </template>
 
