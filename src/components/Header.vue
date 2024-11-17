@@ -6,8 +6,11 @@ import HeaderButton from './RouterButton.vue'
 import { ref } from 'vue'
 import type { IUserData } from '@/interfaces/IUserData'
 import PsiRegisterButton from './PsiRegisterButton.vue'
+import { verifyHavePsi } from '@/service/psi'
+import PsiUpdateButton from './PsiUpdateButton.vue'
 
 const logged = ref(false)
+const havePsi = ref(false)
 const name = ref('')
 
 const loadUserData = async () => {
@@ -19,7 +22,14 @@ const loadUserData = async () => {
     name.value = userData.name
   }
 }
+const verifyPsi = async () => {
+  const response = await verifyHavePsi()
+  if (response) {
+    havePsi.value = true
+  }
+}
 loadUserData()
+verifyPsi()
 </script>
 
 <template>
@@ -39,7 +49,13 @@ loadUserData()
       <HeaderButton title="Sobre" route="user/register" />
     </div>
     <div class="flex justify-center items-center gap-7">
-      <PsiRegisterButton />
+      <div class="font-lexend text-blue-900">
+        Bem vindo de volta {{ name }}!
+      </div>
+      <PsiRegisterButton v-if="!havePsi" />
+      <div v-if="logged">
+        <!-- <PsiUpdateButton v-if="havePsi" /> -->
+      </div>
       <div v-if="!logged"><LoginButton /></div>
       <button
         class="flex font-funnel t text-2xl drop-shadow-2xl hover:font-bold hover:underline text-center text-blue-700 transition duration-500"

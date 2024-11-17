@@ -7,6 +7,6 @@ import RouterButton from './RouterButton.vue'
   <div
     class="flex border-2 rounded-none hover:rounded-xl border-blue-600 transition duration-1000"
   >
-    <RouterButton title="Sou Psicologo" route="/psi/register" alert="true" />
+    <RouterButton title="Atualizar Perfil" route="/psi/update" alert="" />
   </div>
 </template>
